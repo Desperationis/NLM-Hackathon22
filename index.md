@@ -13,13 +13,17 @@ Hello! I am Diego Contreras from John Glenn High School. I have been programming
 ## Requirements
 Before getting to the exciting stuff, you'll need the following to perform the attack:
 * Have a Linux-based OS (Debian, Fedora, Arch, Ubuntu, Kali, ect.)
-* Have *consented* access to a home router (enterprise-level routers have protections against this)
+* Have *consented* access to a cheap home router (expensive ones may have protections against this attack)
 * Know the basics of packets and protocols.
 * Know the basics of the command line.
 * Have `nmap` installed via your package manager (`sudo apt install nmap` for Debian-based OS)
 
 ## How it works
-Teach how the attack works
+![example](assets/images/teach.png)
+
+Normally, your computer sends all of its data to the router, as pictured above. However, using a technique known as ARP Poisoning, you can trick your computer into sending all its data to a hacker's computer. After this, the hacker can do whatever they want with it. The picture above shows it simply passing it along to the router, giving you internet access while the hacker can see everything you are doing.
+
+For the sake of this tutorial, we will only be worrying about the first part: ARP Poisoning. We will NOT do anything with the packets and simply drop them, resulting in the target computer not having internet access.
 
 
 ## Performing the attack
@@ -114,6 +118,8 @@ By now, you should have the following:
 
 
 ### Step 3
+NOTE: This is the step that might not work with all routers. Some may have protections against it, and at most you'll only block access to the router's login page and nothing more. 
+
 Here we will run the actual `nemesis` command:
 
 ```

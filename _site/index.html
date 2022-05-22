@@ -74,14 +74,18 @@
 <p>Before getting to the exciting stuff, you’ll need the following to perform the attack:</p>
 <ul>
   <li>Have a Linux-based OS (Debian, Fedora, Arch, Ubuntu, Kali, ect.)</li>
-  <li>Have <em>consented</em> access to a home router (enterprise-level routers have protections against this)</li>
+  <li>Have <em>consented</em> access to a cheap home router (expensive ones may have protections against this attack)</li>
   <li>Know the basics of packets and protocols.</li>
   <li>Know the basics of the command line.</li>
   <li>Have <code class="language-plaintext highlighter-rouge">nmap</code> installed via your package manager (<code class="language-plaintext highlighter-rouge">sudo apt install nmap</code> for Debian-based OS)</li>
 </ul>
 
 <h2 id="how-it-works">How it works</h2>
-<p>Teach how the attack works</p>
+<p><img src="assets/images/teach.png" alt="example" /></p>
+
+<p>Normally, your computer sends all of its data to the router, as pictured above. However, using a technique known as ARP Poisoning, you can trick your computer into sending all its data to a hacker’s computer. After this, the hacker can do whatever they want with it. The picture above shows it simply passing it along to the router, giving you internet access while the hacker can see everything you are doing.</p>
+
+<p>For the sake of this tutorial, we will only be worrying about the first part: ARP Poisoning. We will NOT do anything with the packets and simply drop them, resulting in the target computer not having internet access.</p>
 
 <h2 id="performing-the-attack">Performing the attack</h2>
 <p>To perform this attack, we will be using <a href="https://github.com/libnet/nemesis">nemesis</a>. This tool is used for many things relating to packet creation and formation, but today we will use it to create and spoof ARP packets.</p>
@@ -180,6 +184,8 @@ wlp6s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
 </ul>
 
 <h3 id="step-3">Step 3</h3>
+<p>NOTE: This is the step that might not work with all routers. Some may have protections against it, and at most you’ll only block access to the router’s login page and nothing more.</p>
+
 <p>Here we will run the actual <code class="language-plaintext highlighter-rouge">nemesis</code> command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@hackerman ~&gt; sudo nemesis arp -c 10000 -i 1 -v -r -d wlp6s0 -S 192.168.1.1 -D 192.168.1.113 -h $60:14:B3:B9:DE:BD
