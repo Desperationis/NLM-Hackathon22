@@ -4,8 +4,6 @@ layout: default
 
 **Submission for 2022 NLMUSD Hackathon**  
 
-**Message for Live Demo**
-
 # Introduction
 Hello! I am Diego Contreras from John Glenn High School. I have been programming since I was in middle school, completely self-taught, and have a great deal in experience working with computers. This year's theme is to **teach something we are passionate about**. Personally, I am passionate about **hacking**. Because of how vast the field is, I'll teach you one small attack: `ARP-Spoofed DoS`. This specific attack allows you to completely block a device on a network from accessing the internet for as long as you'd like.
 
